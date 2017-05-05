@@ -8,12 +8,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="scripts/getData.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <style>
         #info
         {
             text-align: center;
-            padding-top: 200px;
+            padding-top: 150px;
         }
 
         #heading, #temp
@@ -26,6 +25,12 @@
             background-color: lightskyblue;
         }
 
+        #description
+        {
+            color: white;
+            font-size: 50px;
+        }
+
 
     </style>
 </head>
@@ -34,6 +39,7 @@
 <div id="info">
     <p id="heading"></p>
     <p id="temp"></p>
+    <p id="description"></p>
 
 </div><!--end of #info-->
 
@@ -44,12 +50,11 @@
         getLocation().then(function(location){
             return reqData(location);
         }).then(function(data){
+            console.log(data);
             return drawData(data);
         });
 
     };
-
-
 
 
 

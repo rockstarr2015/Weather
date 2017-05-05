@@ -40,12 +40,23 @@ var reqData = function(location){
 var drawData = function(data){
   return new Promise(function(resolve,reject){
 
-      var name = document.createTextNode(data.name);
+      var name = document.createTextNode(data.name+",");
       document.getElementById('heading').appendChild(name);
 
-      var temp = data.main.temp.toFixed(0);
-      var temperature = document.createTextNode(temp);
+      var country = document.createTextNode(data.sys.country);
+      document.getElementById('heading').appendChild(country);
+
+      var temp = data.main.temp;
+      var temperature = document.createTextNode(temp+" ℃");
       document.getElementById('temp').appendChild(temperature);
+
+      var description = data.weather[0].description+" and "+data.weather[1].description;
+      var des = document.createTextNode(description);
+      document.getElementById('description').appendChild(des);
+
+
+
+
 
   });
 };
