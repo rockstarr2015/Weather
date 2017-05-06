@@ -1,0 +1,30 @@
+#info
+{
+    text-align: center;
+    padding-top: 150px;
+}
+
+#heading, #temp
+{
+    font-size: 700%;
+    color:black;
+}
+
+body {
+
+    background-image: url("../resources/background.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    background-size: cover;
+
+
+}
+
+
+#description
+{
+    color: black;
+    font-size: 500%;
+}

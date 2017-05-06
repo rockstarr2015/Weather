@@ -54,10 +54,6 @@ var drawData = function(data){
       var des = document.createTextNode(description);
       document.getElementById('description').appendChild(des);
 
-
-
-
-
   });
 };
 
