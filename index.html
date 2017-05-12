@@ -18,6 +18,10 @@
     <p id="temp"></p>
     <p id="description"></p>
 
+    <div id="showMore" style="visibility: hidden">
+        <button class="btn btn-primary">Show Forecast</button>
+    </div>
+
 </div><!--end of #info-->
 </div>
 <script>
@@ -27,13 +31,13 @@
         getLocation().then(function(location){
             return reqData(location);
         }).then(function(data){
-            console.log(data);
             return drawData(data);
+        }).then(function(data){
+            console.log(data);
+            showMore_visibility();
         });
 
     };
-
-
 
 </script>
 

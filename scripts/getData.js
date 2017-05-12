@@ -14,8 +14,11 @@ var getLocation = function(){
 
 var reqData = function(location){
     return new Promise(function(resolve,reject){
-        var lat = location.lat;
-        var lon = location.lon;
+        //var lat = location.lat;
+        //var lon = location.lon;
+
+        var lat = 35;
+        var lon = 137;
 
         var httpRequest = new XMLHttpRequest();
 
@@ -50,14 +53,39 @@ var drawData = function(data){
       var temperature = document.createTextNode(temp+" ℃");
       document.getElementById('temp').appendChild(temperature);
 
-      var description = data.weather[0].description+" and "+data.weather[1].description;
+
+      var description;
+
+      if(data.weather[1])
+      {
+          description = data.weather[0].description+" and "+data.weather[1].description;
+      }
+
+      else
+      {
+           description = data.weather[0].description;
+      }
+
       var des = document.createTextNode(description);
       document.getElementById('description').appendChild(des);
+
+      //resolve(data);
+
+      var w_img = data.weather[0].main;
+      console.log(w_img);
+
+
 
   });
 };
 
+var showMore_visibility = function(){
+  document.getElementById("showMore").style.visibility = "visible" ;
+};
 
+var setBackground = function(){
+
+};
 
 
 
@@ -68,3 +96,5 @@ var drawData = function(data){
 * 4:Done
 *
 * */
+
+//weather underground api key : 24ed7cb8f10bb712
