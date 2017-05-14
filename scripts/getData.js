@@ -12,19 +12,27 @@ var getLocation = function(){
 };
 
 
-var reqData = function(location){
+var reqData = function(location,type = 'day'){
     return new Promise(function(resolve,reject){
-        //var lat = location.lat;
-        //var lon = location.lon;
+        var lat = location.lat;
+        var lon = location.lon;
 
-        var lat = 35;
-        var lon = 137;
+
 
         var httpRequest = new XMLHttpRequest();
 
         var method = "GET";
-        var url = "http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&units=metric&APPID=2048abd4ff09cb4eaa1f62dc9a077ba6";
+        var url;
 
+        if(type == 'day'){
+            url = "http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&units=metric&APPID=2048abd4ff09cb4eaa1f62dc9a077ba6";
+
+        }
+       // var url = "http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&units=metric&APPID=2048abd4ff09cb4eaa1f62dc9a077ba6";
+
+        else if(type == 'forecast'){
+            url = "http://api.openweathermap.org/data/2.5/forecast/daily?lat=" + lat + "&lon=" + lon + "&cnt=10&units=metric&APPID=2048abd4ff09cb4eaa1f62dc9a077ba6";
+        }
 
         httpRequest.open(method, url, true);
         httpRequest.send();
@@ -33,14 +41,19 @@ var reqData = function(location){
             if(httpRequest.readyState === 4 && httpRequest.status === 200)
             {
                 var jsonRes = JSON.parse(httpRequest.responseText);
-                resolve(jsonRes);
+                data1 = {data:jsonRes,loc:location};
+                resolve(data1);
             }
         };//end of callback function
     });
 };
 
 
-var drawData = function(data){
+var drawData = function(data1){
+
+    var data = data1.data;
+
+
   return new Promise(function(resolve,reject){
 
       var name = document.createTextNode(data.name+",");
@@ -69,23 +82,35 @@ var drawData = function(data){
       var des = document.createTextNode(description);
       document.getElementById('description').appendChild(des);
 
-      //resolve(data);
-
-      var w_img = data.weather[0].main;
-      console.log(w_img);
-
-
+      resolve(data1);
 
   });
 };
 
 var showMore_visibility = function(){
-  document.getElementById("showMore").style.visibility = "visible" ;
+  document.getElementById('showMore').style.visibility="visible";
 };
 
-var setBackground = function(){
 
+var getForecast = function(data1){
+    var location = data1.loc;
+
+    return new Promise(function(resolve, reject){
+        //console.log(location);
+
+        reqData(location,'forecast').then(function(d){
+            console.log(d);
+        })
+
+    });
 };
+
+
+
+
+
+
+
 
 
 

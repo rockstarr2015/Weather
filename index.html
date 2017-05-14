@@ -18,7 +18,7 @@
     <p id="temp"></p>
     <p id="description"></p>
 
-    <div id="showMore" style="visibility: hidden">
+    <div id="showMore" style="visibility:hidden;">
         <button class="btn btn-primary">Show Forecast</button>
     </div>
 
@@ -29,12 +29,12 @@
     window.onload = function()
     {
         getLocation().then(function(location){
-            return reqData(location);
-        }).then(function(data){
-            return drawData(data);
-        }).then(function(data){
-            console.log(data);
+            return reqData(location,'day');
+        }).then(function(data1){
+            return drawData(data1);
+        }).then(function(data1){
             showMore_visibility();
+            return getForecast(data1);
         });
 
     };
